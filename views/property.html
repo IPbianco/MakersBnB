@@ -2,7 +2,7 @@
   <head>
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src=''></script>
+    <script src='interface.js'></script>
     <script src='./src/index.js'></script>
   </head>
 
@@ -15,11 +15,9 @@
           <div class='property-info'>
           </div>
           <div class='booking-info'>
-            <form action='/booking' method='post'>
-              <input type='date' value='Arrival date'>
-              <input type='date' value='Departure date'>
-              <input type='submit' value='Check availability'>
-            </form>
+              <input id='startdate' type='date' value='Arrival date'>
+              <input id='enddate' type='date' value='Departure date'>
+              <input id='checkAvailability' type='submit' value='Check availability'>
             <button id='Book'>Book!</button>
           </div>
         </div>
