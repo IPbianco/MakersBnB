@@ -1,6 +1,7 @@
 ENV['RACK_ENV'] ||= 'development'
 
 require 'data_mapper'
+require 'date'
 require 'rake'
 require_relative 'app/db-setup'
 
@@ -17,5 +18,15 @@ namespace :db do
 
   task :upgrade do
     DataMapper.auto_upgrade!
+  end
+
+  task :populate do
+    10.times do |index| 
+      rental = Rental.create
+      bookings = 10.times.map do |extra|
+        Booking.create(rental_id: rental.id, date: Date.today + index + extra)
+      end
+      rental.bookings = bookings
+    end
   end
 end
