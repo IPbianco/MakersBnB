@@ -22,7 +22,7 @@ namespace :db do
 
   task :populate do
     10.times do |index| 
-      rental = Rental.create
+      rental = Rental.create(price: index * 1000, address: 'nowhere')
       bookings = 10.times.map do |extra|
         Booking.create(rental_id: rental.id, date: Date.today + index + extra)
       end
