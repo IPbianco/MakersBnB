@@ -4,5 +4,4 @@ class App < Sinatra::Base
     set :session_secret, "rental not property"
     use Rack::MethodOverride
   end
-
 end
