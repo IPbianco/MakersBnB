@@ -3,5 +3,5 @@ class Rental
 
   property :id, Serial
 
-  has n, :bookings, through: Resource
+  has n, :bookings
 end
