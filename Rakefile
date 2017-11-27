@@ -1,6 +1,8 @@
+ENV['RACK_ENV'] ||= 'development'
+
 require 'data_mapper'
 require 'rake'
-require_relative 'app/models/dm-setup'
+require_relative 'app/db-setup'
 
 namespace :db do
   task :create do
