@@ -1,5 +1,8 @@
 require 'data_mapper'
 require 'dm-postgres-adapter'
+require 'require_all'
+
+require_rel '*.rb'
 
 DataMapper.setup(
   :default, ENV['DATABASE_URL'] ||
