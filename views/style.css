@@ -31,3 +31,12 @@
 .property-info{
   text-align: center;
 }
+
+.booking-info{
+  position:left;
+}
+
+.head-image{
+  width:10px;
+  height:800px;
+}
