@@ -66,4 +66,12 @@ describe 'Helpers'  do
       end
     end
   end
+  
+  describe '#book' do
+    context 'when given valid date range' do
+    end
+
+    context 'when given invalid date range' do
+    end
+  end
 end

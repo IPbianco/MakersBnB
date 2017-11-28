@@ -14,4 +14,8 @@ class App < Sinatra::Base
     available?(id, start, finish)
   end
 
+  post '/bookings/:id' do |id|
+    start, finish = parse_dates(params)
+    book(id, start, finish)
+  end
 end

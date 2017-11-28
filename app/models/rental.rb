@@ -14,4 +14,9 @@ class Rental
   def available?(range)
     (Array(range) & booked_dates).empty?
   end
+
+  def book_day(date, booking_class: Booking)
+    bookings << booking_class.create(date: date, rental_id: id)
+    save
+  end
 end
