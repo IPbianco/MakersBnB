@@ -3,5 +3,6 @@ def bookings_to_json(booking_class: Booking)
 end
 
 def book(id, start, finish, rental_class: Rental)
-  available?(id, start, finish) && rental_class.first(id).book(start..finish)
+  available?(id, start, finish) && 
+    rental_class.first(id: id).book(start..finish)
 end

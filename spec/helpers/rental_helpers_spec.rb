@@ -16,7 +16,7 @@ describe 'Helpers'  do
       after(:each) { available?(1, start, finish, rental_class: rental_class) }
 
       it 'gets correct rental' do
-        expect(rental_class).to receive(:first).with(1)
+        expect(rental_class).to receive(:first).with({ id: 1 })
       end
 
       it 'calls rental #available?' do
@@ -69,14 +69,23 @@ describe 'Helpers'  do
   
   describe '#book' do
     context 'when given valid date range' do
+      before(:each) { allow(rental).to receive(:available?).and_return(true) }
       after(:each) { book(1, start, finish, rental_class: rental_class) }
 
       it 'gets correct rental' do
-        expect(rental_class).to receive(:first).with(1)
+        expect(rental_class).to receive(:first).with({ id: 1 })
       end
 
       it 'calls rental #book with range' do
         expect(rental).to receive(:book).with(start..finish)
+      end
+    end
+
+    context 'when giving dates that are not available' do
+      before(:each) { allow(rental).to receive(:available?).and_return(false) }
+
+      it 'returns false' do
+        expect(book(1, start, finish, rental_class: rental_class)).to be nil
       end
     end
   end

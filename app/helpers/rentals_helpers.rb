@@ -5,7 +5,7 @@ def rentals_to_json(rental_class: Rental)
 end
 
 def available?(id, start, finish, rental_class: Rental)
-  rental = rental_class.first(id)
+  rental = rental_class.first(id: id)
   availability_to_json(rental.available?((start..finish)))
 end
 
