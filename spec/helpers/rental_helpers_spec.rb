@@ -1,5 +1,5 @@
 describe 'Helpers'  do
-  let(:rental) { double(:rental, available?: true) }
+  let(:rental) { double(:rental, available?: true, book: nil) }
   let(:rental_class) { double(:rental_class, all: [1, 2], first: rental) }
   let(:start) { 1 }
   let(:finish) { 3 }
@@ -69,9 +69,15 @@ describe 'Helpers'  do
   
   describe '#book' do
     context 'when given valid date range' do
-    end
+      after(:each) { book(1, start, finish, rental_class: rental_class) }
 
-    context 'when given invalid date range' do
+      it 'gets correct rental' do
+        expect(rental_class).to receive(:first).with(1)
+      end
+
+      it 'calls rental #book with range' do
+        expect(rental).to receive(:book).with(start..finish)
+      end
     end
   end
 end
