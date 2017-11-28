@@ -1,72 +1,82 @@
-class MockBooking
-  attr_reader :date
-  def initialize(date)
-    @date = date
-  end
-end
-
 describe 'Helpers'  do
-  let(:date) { Date.new(1991, 7, 25) } 
-  let(:bookings) { 10.times.map { |i| MockBooking.new(date + i) } }
-  let(:rental) { double(:rental, bookings: bookings) }
-  let(:rental_class) do 
-    double(:rental_class, all: [1, 2], first: rental)
-  end
+  let(:rental) { double(:rental, available?: true, book: nil) }
+  let(:rental_class) { double(:rental_class, all: [1, 2], first: rental) }
+  let(:start) { 1 }
+  let(:finish) { 3 }
+  let(:params) { { start: start,  finish: finish } }
 
-  describe '#get_rentals' do
+  describe '#rentals_to_json' do
     it 'converts rental object to json' do
-      expect(get_rentals(rental_class: rental_class)).to eq '[1,2]'
+      expect(rentals_to_json(rental_class: rental_class)).to eq '[1,2]'
     end
   end
 
-  describe '#check_dates' do
-    let(:start) { Date.new(1991, 7, 26) }
-    let(:finish) { Date.new(1991, 7, 28) }
-
+  describe '#available?' do
     context 'when getting rental object' do
-      after(:each) do 
-        check_dates(1, start, finish, rental_class: rental_class)
-      end
+      after(:each) { available?(1, start, finish, rental_class: rental_class) }
 
       it 'gets correct rental' do
         expect(rental_class).to receive(:first).with(1)
       end
-    end
 
-    context 'when booked over entire period' do
-      it 'returns false' do
-        expect(check_dates(1, start, finish, rental_class: rental_class))
-          .to be false
+      it 'calls rental #available?' do
+        expect(rental).to receive(:available?).with(1..3)
+      end
+
+      it 'converts to json' do
+        expect(self).to receive(:availability_to_json).with(true)
+      end
+    end
+    
+    context 'when returning json' do
+      before(:each) do 
+        allow(self).to receive(:availability_to_json)
+          .and_return('some json')
+      end
+
+      it 'returns output of json converter' do
+        expect(available?(1, start, finish, rental_class: rental_class))
+          .to eq 'some json'
+      end
+    end
+  end
+
+  describe '#availability_to_json' do
+    context 'when generating json' do
+      it 'puts state in json' do
+        expect(availability_to_json(true)).to eq '{"available":true}'
+      end
+    end
+  end
+
+  describe '#parse_dates' do
+    let(:date) { double(:date, parse: 'date') } 
+
+    context 'when returning dates' do
+      it 'extracts start and finish and converts to dates' do
+        expect(parse_dates(params, date_class: date)).to eq ['date', 'date']
       end
     end
 
-    context 'when start date overlaps with bookings' do
-      let(:start) { date + 9 }
-      let(:finish) { date + 14 }
+    context 'when generating dates' do
+      after(:each) { parse_dates(params, date_class: date) }
 
-      it 'returns true' do
-        expect(check_dates(1, start, finish, rental_class: rental_class))
-          .to be true
+      it 'passes correct arguments to date' do
+        expect(date).to receive(:parse).twice
       end
     end
+  end
+  
+  describe '#book' do
+    context 'when given valid date range' do
+      after(:each) { book(1, start, finish, rental_class: rental_class) }
 
-    context 'when end date overlaps with bookings' do
-      let(:start) { date - 10 }
-      let(:finish) { date }
-
-      it 'returns true' do
-        expect(check_dates(1, start, finish, rental_class: rental_class))
-          .to be true
+      it 'gets correct rental' do
+        expect(rental_class).to receive(:first).with(1)
       end
-    end
 
-    context 'when not booked at all' do
-      let(:start) { Date.new(1991, 7, 13) }
-      let(:finish) { Date.new(1991, 7, 24) }
-
-      it 'returns true' do
-        expect(check_dates(1, start, finish, rental_class: rental_class))
-          .to be true
+      it 'calls rental #book with range' do
+        expect(rental).to receive(:book).with(start..finish)
       end
     end
   end
