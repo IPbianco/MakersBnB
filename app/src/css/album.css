@@ -43,8 +43,11 @@ body {
 
 .card > img {
   margin-bottom: .75rem;
+  overflow:hidden;
 
 }
+
+
 
 .card-text {
   font-size: 85%;
