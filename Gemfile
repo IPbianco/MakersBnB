@@ -8,6 +8,7 @@ gem 'rake'
 gem 'require_all'
 gem 'pg'
 gem 'sinatra'
+gem 'sinatra-cross_origin'
 
 group :test do
   gem 'capybara'
