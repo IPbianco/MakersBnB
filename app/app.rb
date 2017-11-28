@@ -5,5 +5,7 @@ require 'json'
 require 'sinatra/base'
 
 require_rel 'server.rb'
+require_rel 'db-setup.rb'
 require_rel 'controllers/*.rb'
 require_rel 'helpers/*.rb'
+require_rel 'models/*.rb'

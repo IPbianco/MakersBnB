@@ -1,12 +1,11 @@
 require 'date'
 
-def get_rentals(rental_class: Rental)
+def rentals_to_json(rental_class: Rental)
   rental_class.all.to_json
 end
 
-def check_dates(id, start, finish, rental_class: Rental)
-  (Array((start + 1)...finish) & 
-   rental_class.first(id).bookings.map(&:date)).empty?
+def available?(id, start, finish, rental_class: Rental)
+  rental = rental_class.first(id)
+  rental.available? (start..finish)
 end
   
-
