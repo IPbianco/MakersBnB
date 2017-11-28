@@ -58,17 +58,19 @@
 
 
 
-        <script id="example-template" type="text/x-handlebars-template">
+        <script id="property-template" type="text/x-handlebars-template">
           <div class="album text-muted">
             <div class="container">
               <div class="row">
-      {{#each people}}
+      {{#each rentals}}
 
 
           <div class="card">
-            <img src="https://a0.muscache.com/im/pictures/15273358/d7329e9a_original.jpg?aki_policy=large" alt="Mountain View" width='356' height='280'>
+            <img src="https://i.pinimg.com/564x/c1/45/b4/c145b4fa6322048fce85cba6b2bcf0ed.jpg" alt="Mountain View" width='356' height='280'>
             <!-- <img data-src="holder.js/100px280/thumb" alt="Card image cap"> -->
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            <!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> -->
+            <p>{{address}}</p>
+            <p>{{price}}</p>
           </div>
 
 
@@ -105,7 +107,7 @@
         Holder.addTheme("thumb", { background: "#55595c", foreground: "#eceeef", text: "Thumbnail" });
       });
     </script>
-    <script src="../src/js/index.js"></script>
+    <script src="../src/js/interface.js"></script>
     <script src="../../dist/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
