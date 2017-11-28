@@ -5,4 +5,6 @@ class Booking
   property :date, Date
 
   belongs_to :rental
+
+  validates_uniqueness_of :date, scope: :rental_id
 end

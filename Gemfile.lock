@@ -13,6 +13,7 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    coderay (1.1.2)
     data_mapper (1.2.0)
       dm-aggregates (~> 1.2.0)
       dm-constraints (~> 1.2.0)
@@ -65,6 +66,7 @@ GEM
     fastercsv (1.5.5)
     json (1.8.6)
     json_pure (1.8.6)
+    method_source (0.9.0)
     mini_mime (1.0.0)
     mini_portile2 (2.3.0)
     multi_json (1.12.2)
@@ -72,6 +74,9 @@ GEM
     nokogiri (1.8.1)
       mini_portile2 (~> 2.3.0)
     pg (0.21.0)
+    pry (0.11.3)
+      coderay (~> 1.1.0)
+      method_source (~> 0.9.0)
     public_suffix (3.0.1)
     rack (2.0.3)
     rack-protection (2.0.0)
@@ -114,6 +119,7 @@ DEPENDENCIES
   dm-postgres-adapter
   json
   pg
+  pry
   rake
   require_all
   rspec

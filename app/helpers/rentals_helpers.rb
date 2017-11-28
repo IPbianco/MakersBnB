@@ -16,4 +16,3 @@ end
 def parse_dates(params, date_class: Date)
   [params[:start], params[:finish]].map { |date| date_class.parse(date) }
 end
-  
