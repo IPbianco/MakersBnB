@@ -13,4 +13,5 @@ gem 'sinatra-cross_origin'
 group :test do
   gem 'capybara'
   gem 'rspec'
+  gem 'pry'
 end
