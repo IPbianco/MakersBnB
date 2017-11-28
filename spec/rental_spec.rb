@@ -66,4 +66,23 @@ describe Rental do
       end
     end
   end
+
+  describe '#book' do
+    let(:range) { 5..10 } 
+
+    before(:each) { allow(subject).to receive(:book_day) }
+    after(:each) { subject.book(range) }
+
+    it 'books a day for each date in the range' do
+      expect(subject).to receive(:book_day).exactly(6).times
+    end
+
+    it 'books first day' do
+      expect(subject).to receive(:book_day).with(5)
+    end
+
+    it 'books last day' do
+      expect(subject).to receive(:book_day).with(10)
+    end
+  end
 end

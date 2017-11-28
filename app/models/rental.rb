@@ -19,4 +19,8 @@ class Rental
     bookings << booking_class.create(date: date, rental_id: id)
     save
   end
+
+  def book(range)
+    range.each { |date| book_day(date) }
+  end
 end
