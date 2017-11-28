@@ -17,5 +17,6 @@ class App < Sinatra::Base
   post '/bookings/:id' do |id|
     start, finish = parse_dates(params)
     book(id, start, finish)
+    200
   end
 end
