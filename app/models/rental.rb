@@ -4,6 +4,7 @@ class Rental
   property :id, Serial
   property :price, Integer
   property :address, String
+  property :image, Text
 
   has n, :bookings
 

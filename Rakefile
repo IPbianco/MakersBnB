@@ -5,6 +5,11 @@ require 'date'
 require 'rake'
 require_relative 'app/db-setup'
 
+images = ['https://i.pinimg.com/564x/c1/45/b4/c145b4fa6322048fce85cba6b2bcf0ed.jpg',
+          'https://i.pinimg.com/564x/75/f7/d0/75f7d06a433fc20bea883fe6203ba70e.jpg',
+          'https://i.pinimg.com/564x/c7/c9/fb/c7c9fbdde85aaf2ce15cac4d0c45e9b6.jpg']
+
+
 namespace :db do
   task :create do
     ['development', 'test'].each do |name|
@@ -22,7 +27,7 @@ namespace :db do
 
   task :populate do
     10.times do |index| 
-      rental = Rental.create(price: index * 1000, address: 'nowhere')
+      rental = Rental.create(price: index * 1000, address: 'nowhere', image: images[index % 3])
       bookings = 10.times.map do |extra|
         Booking.create(rental_id: rental.id, date: Date.today + index + extra)
       end
@@ -30,3 +35,9 @@ namespace :db do
     end
   end
 end
+
+
+
+
+
+
