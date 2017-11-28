@@ -3,10 +3,14 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js"></script>
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src='../src/js/propertyinterface.js'></script>
+    <script src='../src/js/interface.js'></script>
   </head>
 
   <body>
+    <script id="property" type="text/x-handlebars-template">
+
+      <p>{{location}}s</p>
+
     <div class='container'>
       <div class='head-image'>
         <img src='https://i.pinimg.com/564x/c1/45/b4/c145b4fa6322048fce85cba6b2bcf0ed.jpg'></img>
@@ -22,5 +26,8 @@
           </div>
         </div>
     </div>
+    </script>
+
+<div class="content-placeholder"></div>
   </body>
 </html>
