@@ -25,7 +25,7 @@ class App < Sinatra::Base
 
   get '/bookings/validate/:id' do |id|
     content_type :json
-    return 404 if rental_class.get(id).nil?
+    return 404 if Rental.get(id).nil?
     start, finish = parse_dates(params)
     { available: available?(id, start, finish) }.to_json
   end
