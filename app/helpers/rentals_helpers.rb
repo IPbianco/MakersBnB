@@ -1,7 +1,7 @@
 require 'date'
 
 def rental_to_json(id, rental_class: Rental)
-  rental_class.get(id).to_json || halt(404)
+  rental_class.get(id).to_json
 end
 
 def rentals_to_json(rental_class: Rental)
