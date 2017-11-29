@@ -1,4 +1,14 @@
 class App < Sinatra::Base
+
+  get '/' do
+    erb(:index)
+  end
+
+  get '/rental/:id' do
+    erb(:property)
+  end
+
+
   get '/rentals' do
     content_type :json
     rentals_to_json
