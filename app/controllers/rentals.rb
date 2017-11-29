@@ -6,6 +6,7 @@ class App < Sinatra::Base
 
   get '/rental/:id' do |id|
     content_type :json
+    return 404 if Rental.get(id).nil?
     rental_to_json(id)
   end
 
