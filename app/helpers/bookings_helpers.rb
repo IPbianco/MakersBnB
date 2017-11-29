@@ -3,6 +3,8 @@ def bookings_to_json(booking_class: Booking)
 end
 
 def book(id, start, finish, rental_class: Rental)
-  available?(id, start, finish) && 
-    rental_class.first(id: id).book(start..finish)
+  return 404 if rental_class.get(id).nil?
+  return 409 unless available?(id, start, finish) 
+  rental_class.first(id: id).book(start..finish)
+  200
 end
