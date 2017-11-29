@@ -8,7 +8,6 @@ class App < Sinatra::Base
     erb(:property)
   end
 
-
   get '/rentals' do
     content_type :json
     rentals_to_json
