@@ -1,6 +1,6 @@
 require 'date'
 
-def rentals_to_json(id, rental_class: Rental)
+def rental_to_json(id, rental_class: Rental)
   rental_class.get(id).to_json || 404
 end
 
