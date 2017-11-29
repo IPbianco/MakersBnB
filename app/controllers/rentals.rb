@@ -6,7 +6,7 @@ class App < Sinatra::Base
 
   get '/rental/:id' do |id|
     content_type :json
-    rental_to_json
+    rental_to_json(id)
   end
 
   get '/rental/view' do
