@@ -4,7 +4,12 @@ class App < Sinatra::Base
     erb(:index)
   end
 
-  get '/rental/:id' do
+  get '/rental/:id' do |id|
+    content_type :json
+    Rental.get(id).to_json || halt(404)
+  end
+
+  get '/rental/view' do
     erb(:property)
   end
 
@@ -21,7 +26,7 @@ class App < Sinatra::Base
   get '/bookings/validate/:id' do |id|
     content_type :json
     start, finish = parse_dates(params)
-    available?(id, start, finish).to_json
+    { available: available?(id, start, finish) }.to_json
   end
 
   post '/bookings/:id' do |id|
