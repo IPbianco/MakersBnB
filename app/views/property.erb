@@ -1,26 +1,31 @@
+<!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src='interface.js'></script>
-    <script src='./src/index.js'></script>
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src='/js/propertyinterface.js'></script>
   </head>
 
   <body>
-    <div class='container'>
-      <div class='head-image'>
-        <img src='https://i.pinimg.com/564x/c1/45/b4/c145b4fa6322048fce85cba6b2bcf0ed.jpg'></img>
-      </div>
+    <script id="viewing-template" type="text/x-handlebars-template">
+      <div class='container' id="">
+        <div class='head-image'>
+          <img src={{image}}></img>
+        </div>
         <div class='content'>
           <div class='property-info'>
+            <p>{{address}}</p>
           </div>
           <div class='booking-info'>
-              <input id='startdate' type='date' value='Arrival date'>
-              <input id='enddate' type='date' value='Departure date'>
-              <input id='checkAvailability' type='submit' value='Check availability'>
-            <button id='Book'>Book!</button>
+            <input id='startdate' type='date' value='Arrival date'>
+            <input id='enddate' type='date' value='Departure date'>
+            <input id='checkAvailability' type='submit' value='Check availability'>
+            <button id='book'>Book!</button>
           </div>
         </div>
-    </div>
+      </div>
+    </script>
   </body>
 </html>
