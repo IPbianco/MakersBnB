@@ -33,6 +33,6 @@ class App < Sinatra::Base
 
   post '/bookings/:id' do |id|
     start, finish = parse_dates(params)
-    halt(book(id, start, finish))
+    book(id, start, finish)
   end
 end
