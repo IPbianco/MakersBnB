@@ -4,6 +4,7 @@ end
 
 def book(id, start, finish, rental_class: Rental)
   return 404 if rental_class.first(id: id).nil?
-  available?(id, start, finish) && 
-    rental_class.first(id: id).book(start..finish)
+  return 409 unless available?(id, start, finish) 
+  rental_class.first(id: id).book(start..finish)
+  200
 end
