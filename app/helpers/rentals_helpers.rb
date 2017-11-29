@@ -6,8 +6,8 @@ end
 
 def available?(id, start, finish, rental_class: Rental)
   rental = rental_class.first(id: id)
-  return false if rental.nil?
-  availability_to_json(rental.available?((start..finish)))
+  return 200 if availability_to_json(rental.available?((start..finish)))
+  409
 end
 
 def availability_to_json(state)
