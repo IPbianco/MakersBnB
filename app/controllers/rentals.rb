@@ -7,8 +7,18 @@ class App < Sinatra::Base
     erb(:property)
   end
 
+  get 'rentals/create'do
+    erb(:create)
+  end
+
+  post '/rentals/create' do
+    Rental.create(price: params[:price], address: params[:address], image: params[:image])
+    redirect('/')
+  end
+  
   get '/rentals/:id' do |id|
     content_type :json
+    return 404 if Rental.get(id).nil?
     rental_to_json(id)
   end
 
@@ -31,6 +41,6 @@ class App < Sinatra::Base
 
   post '/bookings/:id' do |id|
     start, finish = parse_dates(params)
-    halt(book(id, start, finish))
+    book(id, start, finish)
   end
 end
