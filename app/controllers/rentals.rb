@@ -9,6 +9,7 @@ class App < Sinatra::Base
 
   get '/rental/:id' do |id|
     content_type :json
+    return 404 if Rental.get(id).nil?
     rental_to_json(id)
   end
 
@@ -31,6 +32,6 @@ class App < Sinatra::Base
 
   post '/bookings/:id' do |id|
     start, finish = parse_dates(params)
-    halt(book(id, start, finish))
+    book(id, start, finish)
   end
 end

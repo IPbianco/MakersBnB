@@ -53,7 +53,7 @@ $(document).ready(function() {
       url: `/bookings/${getID()}`,
       data: {start: startDate(), finish: endDate()}, 
       success: function() {
-        $('#booking-info').html('Congratulations you have booked');
+        $('.booking-info').html('Congratulations you have booked');
       }
     });
   });

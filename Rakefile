@@ -34,6 +34,19 @@ namespace :db do
       rental.bookings = bookings
     end
   end
+
+  task :populate_test do
+    DataMapper.setup(:default, "postgres://localhost/makersbnb_test")
+    DataMapper.finalize
+    DataMapper.auto_migrate!
+    10.times do |index| 
+      rental = Rental.create(price: 78000, address: 'nowhere', image: images[index % 3])
+      bookings = 10.times.map do |extra|
+        Booking.create(rental_id: rental.id, date: Date.today + index + extra)
+      end
+      rental.bookings = bookings
+    end
+  end
 end
 
 
