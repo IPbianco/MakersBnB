@@ -1,3 +1,5 @@
+require 'carrierwave'
+require 'carrierwave/datamapper'
 require 'data_mapper'
 require 'dm-postgres-adapter'
 require 'require_all'
