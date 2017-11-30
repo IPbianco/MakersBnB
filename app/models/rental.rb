@@ -7,6 +7,7 @@ class Rental
   property :image, Text
 
   has n, :bookings
+  belongs_to :user
 
   def booked_dates
     bookings.map(&:date)

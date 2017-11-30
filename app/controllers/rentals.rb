@@ -1,6 +1,18 @@
+require 'bcrypt'
+
 class App < Sinatra::Base
+
   get '/' do
     erb(:index)
+  end
+
+  get '/users/new' do
+    erb(:user)
+  end
+
+  post '/users/new' do
+    User.create(email: params[:email], password: params[:password])
+    redirect '/'
   end
 
   get '/rentals/view' do
@@ -38,6 +50,7 @@ class App < Sinatra::Base
     start, finish = parse_dates(params)
     { available: available?(id, start, finish) }.to_json
   end
+
 
   post '/bookings/:id' do |id|
     start, finish = parse_dates(params)

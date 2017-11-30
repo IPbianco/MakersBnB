@@ -26,8 +26,9 @@ namespace :db do
   end
 
   task :populate do
-    10.times do |index| 
-      rental = Rental.create(price: index * 1000, address: 'nowhere', image: images[index % 3])
+    user = User.create(email: 'maoineoif@gmail.com', hashed_password: 'eugbirnfytrefd')
+    10.times do |index|
+      rental = Rental.create(price: index * 1000, address: 'nowhere', image: images[index % 3], user_id: 1)
       bookings = 10.times.map do |extra|
         Booking.create(rental_id: rental.id, date: Date.today + index + extra)
       end
@@ -39,7 +40,7 @@ namespace :db do
     DataMapper.setup(:default, "postgres://localhost/makersbnb_test")
     DataMapper.finalize
     DataMapper.auto_migrate!
-    10.times do |index| 
+    10.times do |index|
       rental = Rental.create(price: 78000, address: 'nowhere', image: images[index % 3])
       bookings = 10.times.map do |extra|
         Booking.create(rental_id: rental.id, date: Date.today + index + extra)
@@ -48,9 +49,3 @@ namespace :db do
     end
   end
 end
-
-
-
-
-
-
