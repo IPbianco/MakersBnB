@@ -3,8 +3,8 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   storage :file
 
-  def filename
-    "#{Rental.count}.#{file.extension}"
+  def filename(rental_class: Rental)
+    "#{rental_class.count}.#{file.extension}"
   end
 end
 
