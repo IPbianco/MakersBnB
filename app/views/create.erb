@@ -1,7 +1,6 @@
-<form action='/rentals/create' method='post'>
+<form action='/rentals/create' method='post' enctype='multipart/form-data'>
   <input type='text' name='address' placeholder='address'>
   <input type='text' name='price' placeholder='price'>
-  <input type='text' name='image' placeholder='image'>
-  <input type='file'>
+  <input type='file' name='image'>
   <button value='submit'>Submit!</button>
 </form>
