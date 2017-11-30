@@ -44,7 +44,6 @@ body {
 .card > img {
   margin-bottom: .75rem;
   overflow:hidden;
-
 }
 
 
@@ -61,3 +60,4 @@ footer {
 
 footer p {
   margin-bottom: .25rem;
+}

@@ -1,76 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <script src="/js/jquery-3.2.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-    <script src="/js/interface.js"></script>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <!-- <link rel="icon" href="../../favicon.ico"> -->
-
-    <title>MakersBnB</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="css/album.css" rel="stylesheet">
-  </head>
-
-  <body>
-    <div class="collapse bg-inverse" id="navbarHeader">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-8 py-4">
-            <h4 class="text-white">At</h4>
-            <p class="text-muted">info</p>
-          </div>
-          <div class="col-sm-4 py-4">
-            <h4 class="text-white">Contact</h4>
-            <ul class="list-unstyled">
-              <li><a href="#" class="text-white">Follow on Twitter</a></li>
-              <li><a href="#" class="text-white">Like on Facebook</a></li>
-              <li><a href="#" class="text-white">Email me</a></li>
-            </ul>
+<script id="property-template" type="text/x-handlebars-template">
+  <div class="album text-muted">
+    <div class="container">
+      <div class="row">
+        {{#each rentals}}
+        <div class="card">
+          <a class="link" id="Rental{{id}}" href="/rentals/view?id={{id}}">
+            <img src={{image}} alt="Mountain View" width='356' height='500'>
+          </a>
+          <div class="card-text">
+            <p>Address: {{address}}</p>
+            <p>Price/night: £ {{price}}</p>
           </div>
         </div>
+        {{/each}}
       </div>
     </div>
-
-    <section class="jumbotron text-center">
-      <div class="container">
-        <h1 class="jumbotron-heading">IgnacioBnb</h1>
-        <p class="lead text-muted">Find your next vacation venue xx</p>
-        <p>
-          <a href="#" class="btn btn-primary">Main call to action</a>
-          <a href="#" class="btn btn-secondary">Secondary action</a>
-        </p>
-      </div>
-    </section>
-
-    <script id="property-template" type="text/x-handlebars-template">
-      <div class="album text-muted">
-        <div class="container">
-          <div class="row">
-            {{#each rentals}}
-            <div class="card">
-              <a class="link" name="{{id}}" href="/rental/view?id={{id}}">
-                <img src={{image}} alt="Mountain View" width='356'>
-              </a>
-              <div class="card-text">
-                <p>{{address}}</p>
-                <p>{{price}}</p>
-                <input id='button' type='submit' value={{id}}>
-              </div>
-            </div>
-            {{/each}}
-          </div>
-        </div>
-      </div>
-    </script>
-  </body>
-</html>
+  </div>
+</script>
+<script src='/js/interface.js'></script>

@@ -26,7 +26,7 @@ $.ajaxSetup({
 });
 
 $(document).ready(function() {
-  $.getJSON('/rental/' + getID(), function(data) {
+  $.getJSON('/rentals/' + getID(), function(data) {
     propertyInfo = data;
 
     $(function() {
@@ -51,7 +51,7 @@ $(document).ready(function() {
     $.ajax({
       type: "POST",
       url: `/bookings/${getID()}`,
-      data: {start: startDate(), finish: endDate()}, 
+      data: {start: startDate(), finish: endDate()},
       success: function() {
         $('.booking-info').html('Congratulations you have booked');
       }
