@@ -83,6 +83,7 @@ GEM
     json (1.8.6)
     json_pure (1.8.6)
     method_source (0.9.0)
+    mini_magick (4.8.0)
     mini_mime (1.0.0)
     mini_portile2 (2.3.0)
     minitest (5.10.3)
@@ -140,6 +141,7 @@ DEPENDENCIES
   data_mapper
   dm-postgres-adapter
   json
+  mini_magick
   pg
   pry
   rake
