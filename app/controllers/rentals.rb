@@ -3,11 +3,20 @@ class App < Sinatra::Base
     erb(:index)
   end
 
-  get '/rental/view' do
+  get '/rentals/view' do
     erb(:property)
   end
 
-  get '/rental/:id' do |id|
+  get '/rentals/create'do
+    erb(:create)
+  end
+
+  post '/rentals/create' do
+    Rental.create(price: params[:price], address: params[:address], image: params[:image])
+    redirect('/')
+  end
+
+  get '/rentals/:id' do |id|
     content_type :json
     return 404 if Rental.get(id).nil?
     rental_to_json(id)

@@ -1,4 +1,4 @@
-feature 'Home Page' do
+feature 'Home Page', js: true do
 
   scenario 'Opening home page' do
     visit('/')

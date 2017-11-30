@@ -1,7 +1,7 @@
 var rental;
 
 $(document).ready(function(){
-  $.getJSON('https://obscure-spire-75698.herokuapp.com/rentals', function(rentals) {
+  $.getJSON('/rentals', function(rentals) {
     rental = rentals
 
     $(function() {
