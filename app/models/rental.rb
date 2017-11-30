@@ -25,8 +25,9 @@ class Rental
     range.each { |date| book_day(date) }
   end
 
-  def to_json(optional = nil)
-    { id: id, price: price, address: address, 
+  def to_json(optional = nil, json: false)
+    hash = { id: id, price: price, address: address, 
       image: image.file_identifier }
+    json ? hash.to_json : hash
   end
 end
