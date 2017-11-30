@@ -1,41 +1,84 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
   <head>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src=''></script>
-    <script src='./src/index.js'></script>
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="/js/interface.js"></script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- <link rel="icon" href="../../favicon.ico"> -->
+
+    <title>MakersBnB</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/album.css" rel="stylesheet">
   </head>
 
-
   <body>
-    <h1>Properties</h1>
-
-    <div class='container'>
-      <div class='propertylist'>
-        <h1> Propertylist </h1>
-        <div class='property'>
-          <h1> Property </h1>
-          <div class='element-stack'>
-            <a href='file:///Users/mariekerkstoel/Makers/Week6/MakersBnB/views/pro.html'>
-            <img class='property-image' src='https://i.pinimg.com/564x/c1/45/b4/c145b4fa6322048fce85cba6b2bcf0ed.jpg'/>
-            </a>
+    <div class="collapse bg-inverse" id="navbarHeader">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-8 py-4">
+            <h4 class="text-white">At</h4>
+            <p class="text-muted">info</p>
           </div>
-          <div class='property-info'>
-            <p> loft </p>
-            <div class='property-price'>
-              <p>9£</p>
-            </div>
-            <div class='property-location'>
-              <p> London </p>
-            </div>
-            <div class='property-id'>
-
-            </div>  
+          <div class="col-sm-4 py-4">
+            <h4 class="text-white">Contact</h4>
+            <ul class="list-unstyled">
+              <li><a href="#" class="text-white">Follow on Twitter</a></li>
+              <li><a href="#" class="text-white">Like on Facebook</a></li>
+              <li><a href="#" class="text-white">Email me</a></li>
+            </ul>
           </div>
         </div>
       </div>
     </div>
+    <div class="navbar navbar-inverse bg-inverse">
+      <div class="container d-flex justify-content-between">
+        <a href="#" class="navbar-brand">Album</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+    </div>
+
+    <section class="jumbotron text-center">
+      <div class="container">
+        <h1 class="jumbotron-heading">IgnacioBnb</h1>
+        <p class="lead text-muted">Find your next vacation venue xx</p>
+        <p>
+          <a href="#" class="btn btn-primary">Main call to action</a>
+          <a href="#" class="btn btn-secondary">Secondary action</a>
+        </p>
+      </div>
+    </section>
+
+    <script id="property-template" type="text/x-handlebars-template">
+      <div class="album text-muted">
+        <div class="container">
+          <div class="row">
+            {{#each rentals}}
+            <div class="card">
+              <a class="link" name="{{id}}" href="/rental/view?id={{id}}">
+                <img src={{image}} alt="Mountain View" width='356'>
+              </a>
+              <div class="card-text">
+                <p>{{address}}</p>
+                <p>{{price}}</p>
+                <input id='button' type='submit' value={{id}}>
+              </div>
+            </div>
+            {{/each}}
+          </div>
+        </div>
+      </div>
+    </script>
   </body>
 </html>
