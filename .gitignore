@@ -1,4 +1,4 @@
 test.js
 test.html
-*.DS_Store
+**/.DS_Store
 app/public/uploads/*
