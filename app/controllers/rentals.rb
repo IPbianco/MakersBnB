@@ -7,7 +7,7 @@ class App < Sinatra::Base
     erb(:property)
   end
 
-  get 'rentals/create'do
+  get '/rentals/create'do
     erb(:create)
   end
 
@@ -15,7 +15,7 @@ class App < Sinatra::Base
     Rental.create(price: params[:price], address: params[:address], image: params[:image])
     redirect('/')
   end
-  
+
   get '/rentals/:id' do |id|
     content_type :json
     return 404 if Rental.get(id).nil?
