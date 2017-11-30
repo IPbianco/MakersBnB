@@ -9,3 +9,4 @@ DataMapper.setup(
   "postgres://localhost/makersbnb_#{ENV['RACK_ENV']}")
 
 DataMapper.finalize
+DataMapper.auto_upgrade!
