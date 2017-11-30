@@ -1,45 +1,26 @@
+require_relative '../helpers/feature_helpers.rb'
+
 feature 'Home Page', js: true do
 
-  scenario 'Opening home page' do
+  scenario 'Shows Header' do
     visit('/')
     expect(page).to have_content('IgnacioBnb')
   end
 
-  scenario 'Going to property page' do
+  scenario 'Displays button to post a rental' do
     visit('/')
-    click_link('1')
-    expect(page).to have_content('London')
+    expect(page).to have_link_or_button('Post a rental home')
   end
 
-  scenario 'Going to property page' do
-    visit('/rental/view?id=1')
-    expect(page).to have_content('London')
+  scenario 'Directs to post a rental page' do
+    post_a_rental_from_home
+    path_end = '/rentals/create'
+    expect(page).to have_current_path(/.*#{Regexp.quote(path_end)}/, url: true)
+  end
+
+  scenario 'Directs to individual property page' do
+    visit_property_1
+    path_end = '/rentals/view?id=1'
+    expect(page).to have_current_path(/.*#{Regexp.quote(path_end)}/, url: true)
   end
 end
-
-
-
-
-
-#
-# rental/view?id=1
-# #
-#
-
-# expect(current_path).to eq '/users'
-#
-
-# feature 'Sign up' do
-#   scenario 'I can sign up as a user' do
-#     expect { sign_up }.to change(User, :count).by(1)
-#     expect(page).to have_content('Welcome @King!')
-#     expect(User.first.email).to eq 'elvis@gmail.com'
-#   end
-#
-#   scenario 'Requires a matching confirmation password' do
-#     expect do
-#       sign_up(password_confirmation: 'wrong')
-#     end
-#       .not_to change(User, :count)
-#   end
-# end

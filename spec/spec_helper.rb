@@ -3,12 +3,18 @@ ENV['RACK_ENV'] = 'test'
 require_relative '../app/app'
 require 'capybara'
 require 'capybara/rspec'
-require 'rspec'
 require 'database_cleaner'
+require 'pry'
+require 'rspec'
+require 'selenium-webdriver'
 
 Capybara.app = App
-Capybara.default_driver = :selenium
 
+# Capybara.default_driver = :selenium
+
+Capybara.register_driver :selenium do |app|
+  Capybara::Selenium::Driver.new(app, :browser => :chrome)
+end
 
 RSpec.configure do |config|
 
@@ -32,6 +38,12 @@ RSpec.configure do |config|
 
   config.mock_with :rspec do |mocks|
     mocks.verify_partial_doubles = true
+  end
+
+  RSpec::Matchers::define :have_link_or_button do |text|
+    match do |page|
+      Capybara.string(page.body).has_selector?(:link_or_button, text: text)
+    end
   end
 
   config.shared_context_metadata_behavior = :apply_to_host_groups

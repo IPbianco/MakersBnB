@@ -9,11 +9,13 @@ gem 'require_all'
 gem 'pg'
 gem 'sinatra'
 gem 'sinatra-cross_origin'
-gem 'selenium-webdriver'
+
 
 group :test do
+  gem "chromedriver-helper"
   gem 'database_cleaner'
   gem 'capybara'
-  gem 'rspec'
   gem 'pry'
+  gem 'rspec'
+  gem 'selenium-webdriver'
 end
