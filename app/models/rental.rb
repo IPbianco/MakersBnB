@@ -25,7 +25,7 @@ class Rental
     range.each { |date| book_day(date) }
   end
 
-  def to_hash(optional = nil)
+  def to_h(optional = nil)
     { id: id, price: price, address: address, 
       image: image.file_identifier }
   end
