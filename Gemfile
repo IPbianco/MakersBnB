@@ -17,4 +17,6 @@ group :test do
   gem 'capybara'
   gem 'rspec'
   gem 'pry'
+  gem 'simplecov'
+  gem 'simplecov-console'
 end
