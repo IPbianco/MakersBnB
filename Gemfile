@@ -9,6 +9,7 @@ gem 'rake'
 gem 'require_all'
 gem 'pg'
 gem 'sinatra'
+gem 'sinatra-flash'
 gem 'sinatra-cross_origin'
 
 group :test do
