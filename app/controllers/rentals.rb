@@ -3,11 +3,11 @@ class App < Sinatra::Base
     erb(:index)
   end
 
-  get '/rental/view' do
+  get '/rentals/view' do
     erb(:property)
   end
 
-  get '/rental/:id' do |id|
+  get '/rentals/:id' do |id|
     content_type :json
     rental_to_json(id)
   end
