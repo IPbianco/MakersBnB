@@ -10,13 +10,6 @@ def post_a_rental_from_home
   click_link('Post a rental home')
 end
 
-def check_availability(date)
-  visit_property_1
-  fill_in 'startdate', :with => date
-  fill_in 'enddate', :with => date
-  click_button 'Check availability'
-end
-
 def test_book(date)
   visit_property_1
   fill_in 'startdate', :with => date
