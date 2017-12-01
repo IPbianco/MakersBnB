@@ -36,7 +36,7 @@ RSpec.configure do |config|
   end
 
   config.before(:each) do
-    rental = Rental.create(price: 10, address: 'London', image: 'Some_image')
+    rental = Rental.create(price: 10, address: 'London', image: Image.create(file: File.open('/Users/tiago/makers/week6/MakersBnb/app/public/uploads/1.jpg')))
     DatabaseCleaner.start
   end
 

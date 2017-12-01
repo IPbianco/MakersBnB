@@ -40,6 +40,11 @@ namespace :db do
     end
   end
 
+  task :migrate_test do
+    DataMapper.setup(:default, "postgres://localhost/makersbnb_test")
+    DataMapper.auto_migrate!
+  end
+
   task :populate_test do
     DataMapper.setup(:default, "postgres://localhost/makersbnb_test")
     DataMapper.finalize
