@@ -38,7 +38,6 @@ body {
   padding: .75rem;
   margin-bottom: 2rem;
   border: 0;
-
 }
 
 .card > img {
@@ -46,11 +45,13 @@ body {
   overflow:hidden;
 }
 
-
-
 .card-text {
   font-size: 85%;
+  margin-top:5px;
+}
 
+.card-table tr td {
+  width: 100px
 }
 
 footer {
@@ -60,4 +61,8 @@ footer {
 
 footer p {
   margin-bottom: .25rem;
+}
+
+img {
+  object-fit:cover;
 }
