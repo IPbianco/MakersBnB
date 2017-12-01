@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.4.0'
 
+gem 'bcrypt'
 gem 'carrierwave'
 gem 'carrierwave-datamapper'
 gem 'data_mapper'
@@ -11,6 +12,7 @@ gem 'rake'
 gem 'require_all'
 gem 'pg'
 gem 'sinatra'
+gem 'sinatra-flash'
 gem 'sinatra-cross_origin'
 
 group :test do

@@ -1,21 +1,33 @@
+
 class App < Sinatra::Base
+
+  register Sinatra::Flash
+  use Rack::MethodOverride
+
   get '/' do
     erb(:index)
   end
+
 
   get '/rentals/view' do
     erb(:property)
   end
 
   get '/rentals/create'do
-    erb(:create)
+    if session[:user_id] != nil
+      erb(:create)
+    else
+      flash.keep[:signin] = 'Please sign in first'
+      redirect '/users/signin'
+    end
   end
 
   post '/rentals/create' do
     Rental.create(
       price: params[:price], 
       address: params[:address], 
-      image: Image.create(file: params[:image])
+      image: Image.create(file: params[:image]),
+      user_id: session[:user_id]
     )
     redirect('/')
   end
@@ -42,6 +54,7 @@ class App < Sinatra::Base
     start, finish = parse_dates(params)
     { available: available?(id, start, finish) }.to_json
   end
+
 
   post '/bookings/:id' do |id|
     start, finish = parse_dates(params)
