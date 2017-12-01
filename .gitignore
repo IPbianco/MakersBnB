@@ -1,2 +1,5 @@
 test.js
 test.html
+**/.DS_Store
+app/public/uploads/*
+coverage

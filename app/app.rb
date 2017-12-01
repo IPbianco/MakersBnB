@@ -1,5 +1,7 @@
 ENV['RACK_ENV'] ||= 'development'
 
+require 'carrierwave'
+require 'carrierwave/datamapper'
 require 'require_all'
 require 'json'
 require 'sinatra/base'

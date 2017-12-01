@@ -23,7 +23,12 @@ class App < Sinatra::Base
   end
 
   post '/rentals/create' do
-    Rental.create(price: params[:price], address: params[:address], image: params[:image], user_id: session[:user_id])
+    Rental.create(
+      price: params[:price], 
+      address: params[:address], 
+      image: Image.create(file: params[:image]),
+      user_id: session[:user_id]
+    )
     redirect('/')
   end
 
