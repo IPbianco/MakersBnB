@@ -48,14 +48,13 @@ namespace :db do
 
   task :populate_test do
     DataMapper.setup(:default, "postgres://localhost/makersbnb_test")
-    DataMapper.finalize
-    DataMapper.auto_migrate!
-    10.times do |index|
-      rental = Rental.create(price: 78000, address: 'nowhere', image: images[index % 3])
-      bookings = 10.times.map do |extra|
-        Booking.create(rental_id: rental.id, date: Date.today + index + extra)
-      end
-      rental.bookings = bookings
+    user = User.create(email: 'maoineoif@gmail.com', hashed_password: 'eugbirnfytrefd')
+    rental = Rental.create(price: 10, address: 'London', 
+      image: Image.create(file: File.open('app/public/test/test.png')), 
+      user_id: 1)
+    bookings = 10.times.map do |extra|
+      Booking.create(rental_id: rental.id, date: Date.today + extra)
     end
+    rental.bookings = bookings
   end
 end
