@@ -43,6 +43,11 @@ class App < Sinatra::Base
     { available: available?(id, start, finish) }.to_json
   end
 
+  get '/bookings/:id' do |id|
+    content_type :json
+    rental_bookings_to_json(id)
+  end
+
   post '/bookings/:id' do |id|
     start, finish = parse_dates(params)
     book(id, start, finish)
