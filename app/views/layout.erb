@@ -55,6 +55,10 @@
           <a href="/rentals/create" class="btn btn-primary">Post a rental home</a>
           <a href="/users/new" class="btn btn-secondary">Sign up</a>
           <a href="/users/signin" class="btn btn-secondary">Sign in</a>
+          <form action='/sessions' method='post'>
+            <input type='hidden' name='_method' value='delete'>
+            <input class="btn btn-secondary" type='submit' value='Sign out'>
+          </form>
         </p>
       </div>
     </section>

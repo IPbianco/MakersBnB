@@ -4,6 +4,7 @@ require 'sinatra/flash'
 class App < Sinatra::Base
 
   register Sinatra::Flash
+  use Rack::MethodOverride
 
   get '/' do
     erb(:index)
@@ -36,6 +37,12 @@ class App < Sinatra::Base
         flash.now[:notice] = "Password or email not correct"
         erb(:signin)
       end
+    end
+
+    delete '/sessions' do
+      session[:user_id] = nil
+      flash.keep[:exit] = 'goodbye!'
+      redirect '/'
     end
 
   get '/rentals/view' do
