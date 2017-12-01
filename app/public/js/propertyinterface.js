@@ -1,21 +1,47 @@
+var propertyInfo;
+var dates;
+
 function getID() {
   var query = document.location.search;
   return query.match(/(?:id=)(\d+)/)[1];
 };
 
+function cycle(array) {
+  array.unshift(array.pop());
+};
+
+function formatDate(string) {
+  arr = string.split('/');
+  cycle(arr);
+  return arr.join('-');
+};
+
 function startDate(){
-  return $('#startdate').val();
+  return formatDate($('#startDate').val());
 };
 
 function endDate(){
-  return $('#enddate').val();
+  return formatDate($('#endDate').val());
 };
 
 function getQuery() {
   return `?start=${startDate()}&finish=${endDate()}`
-}
+};
 
-var propertyInfo;
+function disableBookedDates(date) {
+  var string = jQuery.datepicker.formatDate('dd-mm-yy', date);
+  return [dates.indexOf(string) == -1];
+};
+
+function disableDates() {
+  $.get(`/bookings/${getID()}`, function(data) {
+    dates = data.map(function(obj) { return obj.date; });
+    $('.datepick').datepicker({ 
+      minDate: 0, 
+      beforeShowDay: disableBookedDates,
+    });
+  });
+};
 
 $.ajaxSetup({
   statusCode :{
@@ -26,14 +52,16 @@ $.ajaxSetup({
 });
 
 $(document).ready(function() {
+
   $.getJSON('/rentals/' + getID(), function(data) {
     propertyInfo = data;
 
     $(function() {
-      var theTemplateScript = $("#viewing-template").html();
-      var theTemplate = Handlebars.compile(theTemplateScript);
-      var theCompiledHtml = theTemplate(propertyInfo);
-      $(document.body).append(theCompiledHtml);
+      var templateScript = $("#viewing-template").html();
+      var template = Handlebars.compile(templateScript);
+      var compiledHTML = template(propertyInfo);
+      $(document.body).append(compiledHTML);
+      disableDates();
     });
   });
 
