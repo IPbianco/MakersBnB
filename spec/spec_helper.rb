@@ -7,16 +7,28 @@ require 'database_cleaner'
 require 'pry'
 require 'rspec'
 require 'selenium-webdriver'
+require 'simplecov'
+require 'simplecov-console'
+
 
 Capybara.app = App
-
-# Capybara.default_driver = :selenium
 
 Capybara.register_driver :selenium do |app|
   Capybara::Selenium::Driver.new(app, :browser => :chrome)
 end
 
+
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new(
+  [SimpleCov::Formatter::Console, SimpleCov::Formatter::HTMLFormatter]
+)
+
+SimpleCov.start
+
+
 RSpec.configure do |config|
+  config.expect_with :rspec do |expectations|
+    expectations.include_chain_clauses_in_custom_matcher_descriptions = true
+  end
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction

@@ -9,6 +9,11 @@ images = ['https://i.pinimg.com/564x/c1/45/b4/c145b4fa6322048fce85cba6b2bcf0ed.j
           'https://i.pinimg.com/564x/75/f7/d0/75f7d06a433fc20bea883fe6203ba70e.jpg',
           'https://i.pinimg.com/564x/c7/c9/fb/c7c9fbdde85aaf2ce15cac4d0c45e9b6.jpg']
 
+namespace :fs do
+  task :clear do
+    system("rm #{File.dirname(__FILE__)}/app/public/uploads/*.*")
+  end
+end
 
 namespace :db do
   task :create do

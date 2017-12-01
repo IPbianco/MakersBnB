@@ -1,15 +1,31 @@
 describe 'Helpers'  do
-  let(:rental) { double(:rental, available?: true, book: nil) }
-  let(:rental_class) { double(:rental_class, all: [1, 2], first: rental) }
   let(:start) { 1 }
   let(:finish) { 3 }
   let(:params) { { start: start,  finish: finish } }
 
+  let(:rental) { double(:rental, available?: true, book: nil, to_h: { a: 1 }) }
+  let(:rental_class) do 
+    double(:rental_class, all: [{ a: 1 }], first: rental, get: rental)
+  end
+
   describe '#rentals_to_json' do
-    it 'converts rental object to json' do
-      expect(rentals_to_json(rental_class: rental_class)).to eq '[1,2]'
+    it 'converts rental objects to json' do
+      expect(rentals_to_json(rental_class: rental_class)).to eq '[{"a":1}]'
     end
   end
+
+  describe '#rental_to_json' do
+    after(:each) { rental_to_json(1, rental_class: rental_class) }
+
+    it 'gets correct rental' do
+      expect(rental_class).to receive(:get).with(1)
+    end
+
+    it 'converts single rental object to json' do
+      expect(rental_to_json(1, rental_class: rental_class)).to eq '{"a":1}'
+    end
+  end
+
 
   describe '#available?' do
     context 'when getting rental object' do
@@ -22,29 +38,12 @@ describe 'Helpers'  do
       it 'calls rental #available?' do
         expect(rental).to receive(:available?).with(1..3)
       end
-
-      it 'converts to json' do
-        expect(self).to receive(:availability_to_json).with(true)
-      end
     end
     
     context 'when returning json' do
-      before(:each) do 
-        allow(self).to receive(:availability_to_json)
-          .and_return('some json')
-      end
-
       it 'returns output of json converter' do
         expect(available?(1, start, finish, rental_class: rental_class))
-          .to eq 'some json'
-      end
-    end
-  end
-
-  describe '#availability_to_json' do
-    context 'when generating json' do
-      it 'puts state in json' do
-        expect(availability_to_json(true)).to eq '{"available":true}'
+          .to eq true
       end
     end
   end
@@ -69,11 +68,11 @@ describe 'Helpers'  do
   
   describe '#book' do
     context 'when given valid date range' do
-      before(:each) { allow(rental).to receive(:available?).and_return(true) }
+      before(:each) { allow(self).to receive(:available?).and_return(true) }
       after(:each) { book(1, start, finish, rental_class: rental_class) }
 
       it 'gets correct rental' do
-        expect(rental_class).to receive(:first).with({ id: 1 })
+        expect(rental_class).to receive(:get).with(1)
       end
 
       it 'calls rental #book with range' do
@@ -82,10 +81,18 @@ describe 'Helpers'  do
     end
 
     context 'when giving dates that are not available' do
-      before(:each) { allow(rental).to receive(:available?).and_return(false) }
+      before(:each) { allow(self).to receive(:available?).and_return(false) }
 
-      it 'returns false' do
-        expect(book(1, start, finish, rental_class: rental_class)).to be nil
+      it 'returns 409 status' do
+        expect(book(1, start, finish, rental_class: rental_class)).to equal 409
+      end
+    end
+
+    context 'when giving non-existent rental' do
+      before(:each) { allow(rental_class).to receive(:get).and_return(nil) }
+
+      it 'returns 409 status' do
+        expect(book(1, start, finish, rental_class: rental_class)).to equal 404
       end
     end
   end
