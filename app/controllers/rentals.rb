@@ -14,7 +14,12 @@ class App < Sinatra::Base
   end
 
   get '/rentals/create'do
-    erb(:create)
+    if session[:user_id] != nil
+      erb(:create)
+    else
+      flash.keep[:signin] = 'Please sign in first'
+      redirect '/users/signin'
+    end
   end
 
   post '/rentals/create' do
