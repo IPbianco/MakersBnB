@@ -11,6 +11,8 @@ GEM
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
     ansi (1.5.0)
+    archive-zip (0.7.0)
+      io-like (~> 0.3.0)
     bcrypt (3.1.11)
     bcrypt-ruby (3.1.5)
       bcrypt (>= 3.1.3)
@@ -21,12 +23,18 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
-    carrierwave (0.8.0)
-      activemodel (>= 3.2.0)
-      activesupport (>= 3.2.0)
-    carrierwave-datamapper (0.2.2)
-      carrierwave (~> 0.8.0)
-      dm-core (~> 1.1)
+    carrierwave (1.2.1)
+      activemodel (>= 4.0.0)
+      activesupport (>= 4.0.0)
+      mime-types (>= 1.16)
+    carrierwave-datamapper (0.1.1)
+      carrierwave
+      dm-core (~> 1.0)
+    childprocess (0.8.0)
+      ffi (~> 1.0, >= 1.0.11)
+    chromedriver-helper (1.1.0)
+      archive-zip (~> 0.7.0)
+      nokogiri (~> 1.6)
     coderay (1.1.2)
     concurrent-ruby (1.0.5)
     data_mapper (1.2.0)
@@ -41,6 +49,7 @@ GEM
       dm-validations (~> 1.2.0)
     data_objects (0.10.17)
       addressable (~> 2.1)
+    database_cleaner (1.6.2)
     diff-lcs (1.3)
     dm-aggregates (1.2.0)
       dm-core (~> 1.2.0)
@@ -80,12 +89,17 @@ GEM
       data_objects (= 0.10.17)
     docile (1.1.5)
     fastercsv (1.5.5)
+    ffi (1.9.18)
     hirb (0.7.3)
     i18n (0.9.1)
       concurrent-ruby (~> 1.0)
+    io-like (0.3.0)
     json (1.8.6)
     json_pure (1.8.6)
     method_source (0.9.0)
+    mime-types (3.1)
+      mime-types-data (~> 3.2015)
+    mime-types-data (3.2016.0521)
     mini_magick (4.8.0)
     mini_mime (1.0.0)
     mini_portile2 (2.3.0)
@@ -119,6 +133,10 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.7.0)
     rspec-support (3.7.0)
+    rubyzip (1.2.1)
+    selenium-webdriver (3.8.0)
+      childprocess (~> 0.5)
+      rubyzip (~> 1.0)
     simplecov (0.15.1)
       docile (~> 1.1.0)
       json (>= 1.8, < 3)
@@ -153,7 +171,9 @@ DEPENDENCIES
   capybara
   carrierwave
   carrierwave-datamapper
-  data_mapper
+  chromedriver-helper
+  data_mapper (= 1.2.0)
+  database_cleaner
   dm-postgres-adapter
   json
   mini_magick
@@ -162,6 +182,7 @@ DEPENDENCIES
   rake
   require_all
   rspec
+  selenium-webdriver
   simplecov
   simplecov-console
   sinatra
