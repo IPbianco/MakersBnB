@@ -52,11 +52,12 @@
         <h1 class="jumbotron-heading">IgnacioBnb</h1>
         <p class="lead text-muted">Find your next vacation venue xx</p>
         <p>
-          <a href="/rentals/create" class="btn btn-primary">Post a rental home</a>
           <% if session[:user_id].nil? %>
+          <a href="/users/signin" class="btn btn-primary">Post a rental home</a>
           <a href="/users/new" class="btn btn-secondary">Sign up</a>
           <a href="/users/signin" class="btn btn-secondary">Sign in</a>
           <%else%>
+          <a href="/rentals/create" class="btn btn-primary">Post a rental home</a>
           <form action='/sessions' method='post'>
             <input type='hidden' name='_method' value='delete'>
             <input class="btn btn-secondary" type='submit' value='Sign out'>
