@@ -36,9 +36,10 @@ RSpec.configure do |config|
   end
 
   config.before(:each) do
+    user = User.create(email: 'maoineoif@gmail.com', hashed_password: 'eugbirnfytrefd')
     rental = Rental.create(price: 10, address: 'London', 
-      image: Image.create(file: File.open('app/public/test/test.png'))
-    )
+      image: Image.create(file: File.open('app/public/test/test.png')), 
+      user_id: 1)
     DatabaseCleaner.start
   end
 
