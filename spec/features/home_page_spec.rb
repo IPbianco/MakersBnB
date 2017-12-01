@@ -18,9 +18,21 @@ feature 'Home Page', js: true do
     end
   end
 
-  scenario 'Directs to post a rental page' do
+  scenario 'Sign up redirects to sign up page' do
+    sign_up_from_home
+    path_end = '/users/new'
+    expect(page).to have_current_path(/.*#{Regexp.quote(path_end)}/, url: true)
+  end
+
+  scenario 'Sign in redirects to sign in page' do
+    sign_in_from_home
+    path_end = '/users/signin'
+    expect(page).to have_current_path(/.*#{Regexp.quote(path_end)}/, url: true)
+  end
+
+  scenario 'Post a rental redirects to sign in page if signed out' do
     post_a_rental_from_home
-    path_end = '/rentals/create'
+    path_end = '/users/signin'
     expect(page).to have_current_path(/.*#{Regexp.quote(path_end)}/, url: true)
   end
 
