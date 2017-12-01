@@ -12,7 +12,11 @@ class App < Sinatra::Base
   end
 
   post '/rentals/create' do
-    Rental.create(price: params[:price], address: params[:address], image: params[:image])
+    Rental.create(
+      price: params[:price], 
+      address: params[:address], 
+      image: Image.create(file: params[:image])
+    )
     redirect('/')
   end
 

@@ -6,6 +6,10 @@ class App < Sinatra::Base
     use Rack::MethodOverride
   end
 
+  CarrierWave.configure do |config|
+    config.root = File.dirname(__FILE__) + '/public'
+  end
+
   before do
     response.headers['Access-Control-Allow-Origin'] = '*'
   end

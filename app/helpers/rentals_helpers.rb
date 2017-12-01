@@ -1,11 +1,11 @@
 require 'date'
 
 def rental_to_json(id, rental_class: Rental)
-  rental_class.get(id).to_json
+  rental_class.get(id).to_hash.to_json
 end
 
 def rentals_to_json(rental_class: Rental)
-  rental_class.all.to_json
+  rental_class.all.map(&:to_hash).to_json
 end
 
 def available?(id, start, finish, rental_class: Rental)

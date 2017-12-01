@@ -4,7 +4,7 @@ class Rental
   property :id, Serial
   property :price, Integer
   property :address, String
-  property :image, Text
+  has 1, :image
 
   has n, :bookings
 
@@ -23,5 +23,10 @@ class Rental
 
   def book(range)
     range.each { |date| book_day(date) }
+  end
+
+  def to_hash(optional = nil)
+    { id: id, price: price, address: address, 
+      image: image.file_identifier }
   end
 end
